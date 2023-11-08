@@ -6,10 +6,11 @@ using namespace std;
 
 void hanoiTower(int n, Linkedlist::LinkedList<int>& source, Linkedlist::LinkedList<int>& auxiliary, Linkedlist::LinkedList<int>& target) {
     if (n > 0) {
+
         hanoiTower(n - 1, source, target, auxiliary);
 
-        target.push_tail(source[0]);
-        source.pop_head();
+        target.push_tail(source.back());
+        source.pop_tail();
 
         std::cout << "Source: ";
         source.printTower();
@@ -79,7 +80,8 @@ int main() {
     //Задача
     cout << "Решение задачи"<< endl;
     cout << endl;
-    int numDiscs = 3;
+
+    int numDiscs = 4;
     Linkedlist::LinkedList<int> sourceTower;
     Linkedlist::LinkedList<int> auxiliaryTower;
     Linkedlist::LinkedList<int> targetTower;

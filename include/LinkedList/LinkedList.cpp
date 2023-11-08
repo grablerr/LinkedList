@@ -37,10 +37,10 @@ namespace Linkedlist {
 		void pop_tail();
 		void delete_node(Node<T>& node);
 		T& operator[](int index);
-		const T& operator[](int index) const;
+		const T operator[](int index) const;
 		void reverse();	
 		void printTower();
-
+		T& back();
 	};
 
 	template<typename T>
@@ -128,8 +128,13 @@ namespace Linkedlist {
 	template<typename T>
 	void LinkedList<T>::push_head(const T& elem) {
 		Node<T>* newNode = new Node<T>(elem);
-		newNode->next = head;
-		head = newNode;
+		if (!head) {
+			head = newNode;
+		}
+		else {
+			newNode->next = head;
+			head = newNode;
+		}
 	}
 
 	template<typename T>
@@ -200,7 +205,7 @@ namespace Linkedlist {
 	}
 
 	template<typename T>
-	const T& LinkedList<T>::operator[](int index) const {
+	const T LinkedList<T>::operator[](int index) const {
 		Node<T>* current = head;
 		int count = 0;
 		while (current) {
@@ -237,6 +242,16 @@ namespace Linkedlist {
 			current = current->next;
 		}
 		std::cout << std::endl;
+	}
+
+	template<typename T>
+	inline T& LinkedList<T>::back(){
+		Node<T>* current = head;
+		while (current->next != nullptr)
+		{
+			current = current->next;
+		}
+		return current->value;
 	}
 }
 
