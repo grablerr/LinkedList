@@ -30,7 +30,7 @@ namespace Linkedlist {
 
 		void push_tail(const T& elem);
 		void push_tail(LinkedList& other);
-		void push_head(T* elem);
+		void push_head(const T& elem);
 		void push_head(LinkedList& other);
 
 		void pop_head();
@@ -38,7 +38,8 @@ namespace Linkedlist {
 		void delete_node(Node<T>& node);
 		T& operator[](int index);
 		const T& operator[](int index) const;
-		void reverse();
+		void reverse();	
+		void printTower();
 
 	};
 
@@ -119,13 +120,13 @@ namespace Linkedlist {
 	void LinkedList<T>::push_tail(LinkedList& other) {
 		Node<T>* otherCurrent = other.head;
 		while (otherCurrent) {
-			push_tail(otherCurrent->data);
+			push_tail(otherCurrent->value);
 			otherCurrent = otherCurrent->next;
 		}
 	}
 
 	template<typename T>
-	void LinkedList<T>::push_head(T* elem) {
+	void LinkedList<T>::push_head(const T& elem) {
 		Node<T>* newNode = new Node<T>(elem);
 		newNode->next = head;
 		head = newNode;
@@ -226,6 +227,16 @@ namespace Linkedlist {
 		}
 
 		head = prev;
+	}
+	
+	template<typename T>
+	void LinkedList<T>::printTower() {
+		Node<T>* current = head;
+		while (current) {
+			std::cout << current->value << " ";
+			current = current->next;
+		}
+		std::cout << std::endl;
 	}
 }
 
